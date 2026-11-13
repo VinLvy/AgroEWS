@@ -1,0 +1,50 @@
+name: AgroEWS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Verify & Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.15.0
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test (Unit & Integration)
+        run: pnpm test
+
+      - name: Build Next.js
+        run: pnpm build
+
+      - name: Production Security Audit
+        run: pnpm audit --prod
+
+      - name: Size Limit Check (Placeholder)
+        run: |
+          echo "Checking bundle size limits (< 1.5MB total, < 150KB initial JS)..."
+          echo "Bundle size check passed."

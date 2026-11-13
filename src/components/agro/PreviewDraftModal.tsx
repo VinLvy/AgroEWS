@@ -29,10 +29,12 @@ export function PreviewDraftModal({
       aria-labelledby="preview-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
     >
-      <div className="bg-surface-card rounded-2xl border-[1.5px] border-border-card max-w-xl w-full p-6 shadow-xl flex flex-col max-h-[90vh]">
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card max-w-xl w-full p-6 shadow-bento-lg flex flex-col max-h-[90vh]">
         <div className="flex items-center gap-3 text-agri-700 mb-3 shrink-0">
-          <StatusIcon name="send" size={24} />
-          <h2 id="preview-modal-title" className="text-lg font-bold text-content-primary">
+          <div className="w-10 h-10 rounded-xl bg-agri-50 border border-agri-100 flex items-center justify-center shrink-0">
+            <StatusIcon name="send" size={20} />
+          </div>
+          <h2 id="preview-modal-title" className="text-lg font-extrabold text-content-primary">
             Pratinjau Pesan Siaran WhatsApp
           </h2>
         </div>
@@ -41,7 +43,7 @@ export function PreviewDraftModal({
           Pesan ini akan dikirimkan kepada <strong>{recipientCount} kontak petani terdaftar</strong> setelah Anda menyetujuinya.
         </p>
 
-        <div className="flex-1 overflow-y-auto bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs leading-relaxed border border-slate-700 mb-4 whitespace-pre-wrap select-all">
+        <div className="flex-1 overflow-y-auto bg-slate-900 text-emerald-100 p-4 rounded-2xl font-mono text-xs leading-relaxed border border-slate-700 mb-4 whitespace-pre-wrap select-all">
           {messageText}
         </div>
 
@@ -50,7 +52,7 @@ export function PreviewDraftModal({
             type="button"
             onClick={onClose}
             disabled={isLoading}
-            className="min-h-touch px-4 py-2.5 rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-800 hover:text-slate-950 active:bg-slate-300 font-bold text-sm transition-colors"
+            className="min-h-touch px-4 py-2.5 rounded-xl border-[1.5px] border-border-card bg-surface-subtle hover:bg-slate-200 text-content-primary font-bold text-sm transition-colors"
           >
             Batal
           </button>
@@ -58,7 +60,7 @@ export function PreviewDraftModal({
             type="button"
             onClick={onConfirm}
             disabled={isLoading}
-            className="min-h-touch px-5 py-2.5 rounded-lg bg-agri-700 hover:bg-agri-900 text-white font-bold text-sm flex items-center gap-2"
+            className="min-h-touch px-5 py-2.5 rounded-xl bg-agri-700 hover:bg-agri-800 text-white font-bold text-sm flex items-center gap-2 shadow-sm transition-colors"
           >
             <StatusIcon name="send" size={18} />
             {isLoading ? "Menyiarkan..." : `Setujui & Siarkan (${recipientCount} Penerima)`}

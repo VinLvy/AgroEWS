@@ -22,15 +22,15 @@ export function FeedTable<T>({
   className = "",
 }: FeedTableProps<T>) {
   return (
-    <div className={`overflow-x-auto rounded-xl border-[1.5px] border-border-card bg-surface-card ${className}`}>
+    <div className={`overflow-x-auto rounded-2xl border-[1.5px] border-border-card bg-surface-card shadow-bento ${className}`}>
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="border-b-[1.5px] border-border-subtle bg-slate-50">
+          <tr className="border-b-[1.5px] border-border-subtle bg-surface-subtle">
             {columns.map((col, idx) => (
               <th
                 key={idx}
                 scope="col"
-                className={`py-3.5 px-4 text-xs font-semibold uppercase tracking-wider text-content-secondary ${col.className || ""}`}
+                className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider text-content-secondary ${col.className || ""}`}
               >
                 {col.header}
               </th>

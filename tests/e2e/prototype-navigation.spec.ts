@@ -7,7 +7,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Prototipe UI: Pengujian Peran & Fungsionalitas Tombol", () => {
-  test("Koordinator BPP: Login, Dasbor Eksekutif, Peta SVG, dan Manajemen Aturan", async ({ page }) => {
+  test("Koordinator BPP: Login, Dasbor Eksekutif, Peta Zonasi, dan Manajemen Aturan", async ({ page }) => {
     // 1. Login Koordinator BPP
     await page.goto("/login");
     await page.fill('input[type="email"]', "koordinator.bpp@pertanian.go.id");
@@ -22,10 +22,12 @@ test.describe("Prototipe UI: Pengujian Peran & Fungsionalitas Tombol", () => {
     // 2. Interaksi Dasbor BPP
     await expect(page.locator("h1")).toContainText("Ikhtisar Agroklimat");
 
-    // Switch view mode (Peta / Tabel)
+    // Switch view mode (Peta / Tabel / Vektor Offline)
     await page.click('button:has-text("Daftar Tabel")');
     await expect(page.locator("table")).toBeVisible();
-    await page.click('button:has-text("Peta SVG")');
+    await page.click('button:has-text("Peta Zonasi")');
+    await expect(page.locator('[data-testid="agro-map-container"]')).toBeVisible();
+    await page.click('button:has-text("Vektor Offline")');
     await expect(page.locator('svg[role="img"]')).toBeVisible();
 
     // Ekspor CSV

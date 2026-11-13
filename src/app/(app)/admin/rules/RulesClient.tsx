@@ -108,19 +108,19 @@ export function RulesClient() {
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-subtle pb-5">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-content-primary">
             Manajemen Aturan Model Risiko Agroklimat
           </h1>
-          <p className="text-sm text-slate-600 mt-1">
+          <p className="text-sm text-content-muted mt-1">
             Konfigurasi ambang batas biometeorologi wereng batang cokelat (*Nilaparvata lugens*) sesuai TECH_SPEC §6.
           </p>
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 bg-[var(--agri-primary-700)] text-white hover:bg-[var(--agri-primary-800)] text-sm font-semibold rounded-lg shadow-xs transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-600"
+          className="min-h-[48px] px-5 py-2.5 inline-flex items-center gap-2 bg-agri-700 text-white hover:bg-agri-800 text-sm font-bold rounded-xl shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-agri-700 shrink-0"
         >
           <StatusIcon name="plus" className="w-4 h-4" />
           <span>Buat Draf Aturan Baru</span>
@@ -128,56 +128,56 @@ export function RulesClient() {
       </div>
 
       {/* Active Rule Card */}
-      <div className="bg-white rounded-xl border-2 border-emerald-600 p-5 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-agri-600 p-5 sm:p-6 shadow-bento space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3">
           <div className="flex items-center gap-3">
-            <span className="px-2.5 py-1 rounded bg-emerald-100 text-emerald-900 text-xs font-bold uppercase tracking-wider">
+            <span className="px-3 py-1 rounded-full bg-agri-700 text-white text-xs font-bold uppercase tracking-wider">
               VERSI AKTIF
             </span>
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-extrabold text-content-primary">
               {activeRule.version} &mdash; {activeRule.title}
             </h2>
           </div>
-          <div className="text-xs text-slate-500">
-            Dibuat oleh: <span className="font-semibold text-slate-700">{activeRule.author}</span> ({activeRule.createdAt})
+          <div className="text-xs text-content-muted">
+            Dibuat oleh: <span className="font-bold text-content-secondary">{activeRule.author}</span> ({activeRule.createdAt})
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-          <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-200">
-            <span className="text-xs font-semibold text-slate-600 uppercase">
+          <div className="p-4 bg-surface-subtle rounded-2xl border border-border-subtle">
+            <span className="text-xs font-bold text-content-muted uppercase">
               Rentang Suhu Optimum
             </span>
-            <div className="text-xl font-bold text-slate-900 mt-1">
+            <div className="text-2xl font-extrabold text-content-primary mt-1 font-mono tabular-nums">
               {activeRule.params.tOptimumMin}&deg;C &ndash; {activeRule.params.tOptimumMax}&deg;C
             </div>
-            <p className="text-xs text-slate-500 mt-1">Zona laju penetasan telur tertinggi</p>
+            <p className="text-xs text-content-secondary mt-1">Zona laju penetasan telur tertinggi</p>
           </div>
 
-          <div className="p-3.5 bg-red-50 rounded-lg border border-red-200">
-            <span className="text-xs font-semibold text-red-900 uppercase">
+          <div className="p-4 bg-status-red-bg rounded-2xl border border-status-red-border">
+            <span className="text-xs font-bold text-status-red-text uppercase">
               Ambang Batas MERAH (Bahaya)
             </span>
-            <div className="text-xl font-bold text-red-700 mt-1">
+            <div className="text-2xl font-extrabold text-status-red-text mt-1 font-mono tabular-nums">
               RH &ge; {activeRule.params.rhRedThreshold}% &bull; {activeRule.params.redRunDays} Hari
             </div>
-            <p className="text-xs text-red-800 mt-1">Pemicu draf peringatan ledakan nimfa</p>
+            <p className="text-xs text-red-900 mt-1">Pemicu draf peringatan ledakan nimfa</p>
           </div>
 
-          <div className="p-3.5 bg-amber-50 rounded-lg border border-amber-200">
-            <span className="text-xs font-semibold text-amber-900 uppercase">
+          <div className="p-4 bg-status-amber-bg rounded-2xl border border-status-amber-border">
+            <span className="text-xs font-bold text-status-amber-text uppercase">
               Ambang Batas AMBER (Waspada)
             </span>
-            <div className="text-xl font-bold text-amber-800 mt-1">
+            <div className="text-2xl font-extrabold text-status-amber-text mt-1 font-mono tabular-nums">
               RH &ge; {activeRule.params.rhAmberThreshold}% &bull; {activeRule.params.amberRunDays} Hari
             </div>
-            <p className="text-xs text-amber-900 mt-1">Pemicu peringatan sanitasi dan pengamatan</p>
+            <p className="text-xs text-amber-950 mt-1">Pemicu peringatan sanitasi dan pengamatan</p>
           </div>
         </div>
       </div>
 
       {/* Interactive Simulator Sandbox */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-4">
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card p-5 sm:p-6 shadow-bento space-y-4">
         <div className="border-b border-slate-100 pb-3">
           <h2 className="text-base font-bold text-slate-900">
             Simulator Evaluasi Risiko Cuaca (Interaktif)
@@ -280,10 +280,10 @@ export function RulesClient() {
       </div>
 
       {/* Rule Versions History Table */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
-        <div className="p-4 border-b border-slate-200">
-          <h2 className="text-base font-bold text-slate-900">Riwayat Versi Aturan (rule_versions)</h2>
-          <p className="text-xs text-slate-500">
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card overflow-hidden shadow-bento">
+        <div className="p-5 border-b border-border-subtle">
+          <h2 className="text-base font-extrabold text-content-primary">Riwayat Versi Aturan (rule_versions)</h2>
+          <p className="text-xs text-content-muted mt-0.5">
             Sistem hanya mengizinkan tepat satu versi aturan aktif pada waktu bersamaan (§4 skema).
           </p>
         </div>
@@ -347,20 +347,20 @@ export function RulesClient() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
         >
-          <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 space-y-4 border border-slate-200">
+          <div className="bg-surface-card rounded-3xl shadow-bento-lg max-w-lg w-full p-6 space-y-4 border-[1.5px] border-border-card">
             <div className="flex items-start justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Buat Draf Versi Aturan Baru</h2>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <h2 className="text-lg font-extrabold text-content-primary">Buat Draf Versi Aturan Baru</h2>
+                <p className="text-xs text-content-muted mt-0.5">
                   Modifikasi parameter ambang batas untuk kalibrasi lapangan.
                 </p>
               </div>
               <button
                 onClick={() => setShowModal(false)}
-                className="min-h-[44px] min-w-[44px] text-slate-400 hover:text-slate-600 inline-flex items-center justify-center rounded-lg"
+                className="min-h-[44px] min-w-[44px] text-content-muted hover:text-content-primary hover:bg-surface-subtle inline-flex items-center justify-center rounded-xl transition-colors"
                 aria-label="Tutup dialog"
               >
-                ✕
+                <StatusIcon name="x" className="w-5 h-5" />
               </button>
             </div>
 

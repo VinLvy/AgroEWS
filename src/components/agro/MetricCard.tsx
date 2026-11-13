@@ -3,7 +3,7 @@ import { StatusIcon, type IconName } from "./StatusIcon";
 import { speakNumber } from "./speak-number";
 
 interface SparklineData {
-  values: number[]; // 3 hari: [hari1, hari2, hari3]
+  values: number[];
   min?: number;
   max?: number;
 }
@@ -16,8 +16,37 @@ interface MetricCardProps {
   icon: IconName;
   description?: string;
   sparkline?: SparklineData;
+  tone?: "default" | "amber" | "red";
+  badgeText?: string;
   className?: string;
 }
+
+const TONE_CLASSES = {
+  default: {
+    card: "bg-surface-card border-border-card",
+    iconWrap: "bg-agri-50 text-agri-700 border border-agri-100",
+    barFill: "#DCFCE7",
+    barPeakFill: "#86EFAC",
+    lineStroke: "#15803D",
+    badge: "bg-agri-50 text-agri-800 border-agri-100",
+  },
+  amber: {
+    card: "bg-surface-card border-status-amber-border",
+    iconWrap: "bg-status-amber-bg text-status-amber-text border border-status-amber-border",
+    barFill: "#FEF3C7",
+    barPeakFill: "#FCD34D",
+    lineStroke: "#B45309",
+    badge: "bg-status-amber-bg text-status-amber-text border-status-amber-border",
+  },
+  red: {
+    card: "bg-surface-card border-status-red-border",
+    iconWrap: "bg-status-red-bg text-status-red-text border border-status-red-border",
+    barFill: "#FEE2E2",
+    barPeakFill: "#FCA5A5",
+    lineStroke: "#B91C1C",
+    badge: "bg-status-red-bg text-status-red-text border-status-red-border",
+  },
+};
 
 export function MetricCard({
   label,
@@ -27,21 +56,24 @@ export function MetricCard({
   icon,
   description,
   sparkline,
+  tone = "default",
+  badgeText,
   className = "",
 }: MetricCardProps) {
   const accessibleLabel = `${label} ${speakNumber(value, spokenUnit || unit)}`;
+  const palette = TONE_CLASSES[tone];
 
-  // Generator SVG Sparkline 3 hari
   const renderSparkline = (data: SparklineData) => {
     if (!data.values || data.values.length < 2) return null;
 
-    const width = 80;
-    const height = 30;
-    const padding = 4;
+    const width = 96;
+    const height = 40;
+    const padding = 5;
 
     const min = data.min ?? Math.min(...data.values);
     const max = data.max ?? Math.max(...data.values);
     const range = max - min || 1;
+    const barWidth = Math.max(8, Math.floor((width - 2 * padding) / data.values.length) - 4);
 
     const points = data.values
       .map((val, idx) => {
@@ -56,13 +88,29 @@ export function MetricCard({
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="overflow-visible"
+        className="overflow-visible shrink-0"
         aria-hidden="true"
       >
+        {data.values.map((val, idx) => {
+          const cx = padding + (idx / (data.values.length - 1)) * (width - 2 * padding);
+          const normH = Math.max(8, ((val - min) / range) * (height - 12) + 8);
+          const isLast = idx === data.values.length - 1;
+          return (
+            <rect
+              key={`bar-${idx}`}
+              x={cx - barWidth / 2}
+              y={height - normH}
+              width={barWidth}
+              height={normH}
+              rx={3}
+              fill={isLast ? palette.barPeakFill : palette.barFill}
+            />
+          );
+        })}
         <polyline
           fill="none"
-          stroke="var(--border-strong)"
-          strokeWidth="2"
+          stroke={palette.lineStroke}
+          strokeWidth="2.2"
           strokeLinecap="round"
           strokeLinejoin="round"
           points={points}
@@ -72,11 +120,13 @@ export function MetricCard({
           const cy = height - padding - ((val - min) / range) * (height - 2 * padding);
           return (
             <circle
-              key={idx}
+              key={`dot-${idx}`}
               cx={cx}
               cy={cy}
               r="3"
-              fill="var(--agri-primary-700)"
+              fill={palette.lineStroke}
+              stroke="#FFFFFF"
+              strokeWidth="1.2"
             />
           );
         })}
@@ -88,28 +138,41 @@ export function MetricCard({
     <div
       tabIndex={0}
       aria-label={accessibleLabel}
-      className={`bg-surface-card p-4 rounded-xl border-[1.5px] border-border-card shadow-sm flex flex-col justify-between ${className}`}
+      className={`rounded-2xl border-[1.5px] p-5 shadow-bento flex flex-col justify-between transition-all hover:shadow-bento-lg focus:outline-none focus:ring-2 focus:ring-agri-700 ${palette.card} ${className}`}
     >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-semibold text-content-secondary">{label}</span>
-        <div className="p-2 rounded-lg bg-agri-50 text-agri-700">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div>
+          <span className="text-xs font-bold uppercase tracking-wider text-content-muted block">
+            {label}
+          </span>
+          {badgeText && (
+            <span
+              className={`mt-1.5 inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold border ${palette.badge}`}
+            >
+              {badgeText}
+            </span>
+          )}
+        </div>
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${palette.iconWrap}`}>
           <StatusIcon name={icon} size={20} />
         </div>
       </div>
 
-      <div className="flex items-baseline justify-between mt-1">
-        <div className="flex items-baseline gap-1">
-          <span className="text-2xl sm:text-3xl font-bold text-content-primary">
+      <div className="flex items-end justify-between gap-3 mt-1">
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-content-primary tabular-nums leading-none">
             {value.toFixed(1)}
           </span>
-          <span className="text-sm font-medium text-content-muted">{unit}</span>
+          <span className="text-sm font-bold text-content-muted">{unit}</span>
         </div>
 
-        {sparkline && <div className="ml-2">{renderSparkline(sparkline)}</div>}
+        {sparkline && renderSparkline(sparkline)}
       </div>
 
       {description && (
-        <p className="mt-2 text-xs text-content-muted line-clamp-1">{description}</p>
+        <p className="mt-3 pt-2.5 border-t border-border-subtle text-xs font-medium text-content-secondary line-clamp-2">
+          {description}
+        </p>
       )}
     </div>
   );

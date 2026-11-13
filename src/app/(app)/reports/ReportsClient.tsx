@@ -125,25 +125,25 @@ export function ReportsClient({ userRole = "ppl" }: ReportsClientProps) {
       )}
 
       {/* Header & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-subtle pb-5">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-content-primary">
               {isCoordinator
                 ? "Validasi Laporan Petani (Supervisi BPP)"
                 : "Feed Laporan Petani (Ground-Truthing Dusun)"}
             </h1>
             <span
-              className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase border ${
+              className={`px-3 py-1 rounded-full text-xs font-bold uppercase border ${
                 isCoordinator
-                  ? "bg-blue-100 text-blue-900 border-blue-300"
-                  : "bg-emerald-100 text-emerald-900 border-emerald-300"
+                  ? "bg-blue-50 text-blue-900 border-blue-300"
+                  : "bg-agri-50 text-agri-800 border-agri-100"
               }`}
             >
               {isCoordinator ? "Supervisi Kecamatan" : "Wilayah Binaan PPL"}
             </span>
           </div>
-          <p className="text-sm text-slate-600 mt-1">
+          <p className="text-sm text-content-muted mt-1">
             {isCoordinator
               ? "Rekapitulasi laporan observasi wereng cokelat di seluruh 4 desa binaan BPP Kuranji (Design 5.5)."
               : "Umpan balik observasi populasi wereng cokelat di petak sawah oleh petani binaan Nagari Sungai Bangek."}
@@ -152,51 +152,57 @@ export function ReportsClient({ userRole = "ppl" }: ReportsClientProps) {
 
         <button
           onClick={() => setShowSimModal(true)}
-          className="min-h-[48px] px-4 py-2.5 inline-flex items-center justify-center gap-2 bg-[var(--agri-primary-700)] text-white text-sm font-bold rounded-lg hover:bg-[var(--agri-primary-800)] active:bg-emerald-950 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-600 shadow-xs"
+          className="min-h-[48px] px-5 py-2.5 inline-flex items-center justify-center gap-2 bg-agri-700 text-white text-sm font-bold rounded-xl hover:bg-agri-800 active:bg-agri-900 transition-colors focus:outline-none focus:ring-2 focus:ring-agri-700 shadow-sm shrink-0"
         >
           <StatusIcon name="plus" className="w-4 h-4" />
           <span>Simulasi Laporan Baru</span>
         </button>
       </div>
 
-      {/* Metric Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 rounded-xl border border-slate-200 bg-white shadow-xs">
+      {/* Metric Summary Cards (AgriCore Bento) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="p-5 rounded-3xl border-[1.5px] border-border-card bg-surface-card shadow-bento">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+            <span className="text-xs font-bold uppercase tracking-wider text-content-muted">
               Total Laporan Masuk
             </span>
-            <StatusIcon name="file-text" className="w-5 h-5 text-slate-400" />
+            <div className="w-9 h-9 rounded-xl bg-surface-subtle border border-border-subtle flex items-center justify-center">
+              <StatusIcon name="file-text" className="w-4 h-4 text-content-secondary" />
+            </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-slate-900">{totalReports}</span>
-            <span className="text-xs text-slate-500 font-medium">laporan</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-4xl font-extrabold text-content-primary tabular-nums">{totalReports}</span>
+            <span className="text-xs text-content-muted font-bold">laporan</span>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-red-200 bg-red-50/50 shadow-xs">
+        <div className="p-5 rounded-3xl border-[1.5px] border-status-red-border bg-surface-card shadow-bento">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-red-900">
+            <span className="text-xs font-bold uppercase tracking-wider text-status-red-text">
               Gejala Berat (Kode 2)
             </span>
-            <StatusIcon name="shield-alert" className="w-5 h-5 text-red-600" />
+            <div className="w-9 h-9 rounded-xl bg-status-red-bg border border-status-red-border flex items-center justify-center">
+              <StatusIcon name="shield-alert" className="w-4 h-4 text-status-red-text" />
+            </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-red-700">{severeReports}</span>
-            <span className="text-xs text-red-700 font-medium">butuh penanganan</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-4xl font-extrabold text-status-red-text tabular-nums">{severeReports}</span>
+            <span className="text-xs text-status-red-text font-bold">butuh penanganan</span>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 shadow-xs">
+        <div className="p-5 rounded-3xl bg-gradient-to-br from-agri-700 to-agri-900 text-white shadow-bento">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-emerald-900">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-100">
               Terverifikasi PPL
             </span>
-            <StatusIcon name="user-check" className="w-5 h-5 text-emerald-700" />
+            <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center">
+              <StatusIcon name="user-check" className="w-4 h-4 text-white" />
+            </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-emerald-800">{verifiedReports}</span>
-            <span className="text-xs text-emerald-700 font-medium">
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-4xl font-extrabold tabular-nums">{verifiedReports}</span>
+            <span className="text-xs text-emerald-100 font-bold">
               ({Math.round((verifiedReports / (totalReports || 1)) * 100)}%)
             </span>
           </div>
@@ -204,47 +210,47 @@ export function ReportsClient({ userRole = "ppl" }: ReportsClientProps) {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between bg-white p-3.5 rounded-xl border border-slate-200">
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between bg-surface-card p-4 rounded-2xl border-[1.5px] border-border-card shadow-bento">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider mr-1">
+          <span className="text-xs font-bold text-content-muted uppercase tracking-wider mr-1">
             Status Gejala:
           </span>
           <button
             onClick={() => setFilterCode("all")}
-            className={`min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 ${
+            className={`min-h-[44px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-agri-700 ${
               filterCode === "all"
-                ? "bg-slate-900 text-white"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                ? "bg-slate-900 text-white shadow-xs"
+                : "bg-surface-subtle text-content-secondary hover:bg-slate-200"
             }`}
           >
             Semua ({reports.length})
           </button>
           <button
             onClick={() => setFilterCode("2")}
-            className={`min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 ${
+            className={`min-h-[44px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-red-600 ${
               filterCode === "2"
-                ? "bg-red-700 text-white"
-                : "bg-red-100 text-red-800 hover:bg-red-200"
+                ? "bg-red-700 text-white shadow-xs"
+                : "bg-status-red-bg text-status-red-text border border-status-red-border hover:bg-red-100"
             }`}
           >
             Bahaya Kode 2 ({reports.filter((r) => r.code === 2).length})
           </button>
           <button
             onClick={() => setFilterCode("1")}
-            className={`min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 ${
+            className={`min-h-[44px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-amber-600 ${
               filterCode === "1"
-                ? "bg-amber-600 text-white"
-                : "bg-amber-100 text-amber-900 hover:bg-amber-200"
+                ? "bg-amber-700 text-white shadow-xs"
+                : "bg-status-amber-bg text-status-amber-text border border-status-amber-border hover:bg-amber-100"
             }`}
           >
             Waspada Kode 1 ({reports.filter((r) => r.code === 1).length})
           </button>
           <button
             onClick={() => setFilterCode("0")}
-            className={`min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+            className={`min-h-[44px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-agri-700 ${
               filterCode === "0"
-                ? "bg-emerald-700 text-white"
-                : "bg-emerald-100 text-emerald-900 hover:bg-emerald-200"
+                ? "bg-agri-700 text-white shadow-xs"
+                : "bg-status-green-bg text-status-green-text border border-status-green-border hover:bg-emerald-100"
             }`}
           >
             Aman Kode 0 ({reports.filter((r) => r.code === 0).length})
@@ -257,13 +263,13 @@ export function ReportsClient({ userRole = "ppl" }: ReportsClientProps) {
             placeholder="Cari petani / dusun / poktan..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="min-h-[44px] w-full sm:w-64 px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--agri-primary-700)] text-slate-900"
+            className="min-h-[44px] w-full sm:w-64 px-3.5 py-2 text-sm rounded-xl border-[1.5px] border-border-strong focus:outline-none focus:ring-2 focus:ring-agri-700 text-content-primary bg-white"
           />
         </div>
       </div>
 
       {/* Reports Table (Design 5.5 Specification) */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card overflow-hidden shadow-bento">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -384,24 +390,24 @@ export function ReportsClient({ userRole = "ppl" }: ReportsClientProps) {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
         >
-          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4 border border-slate-200">
+          <div className="bg-surface-card rounded-3xl shadow-bento-lg max-w-md w-full p-6 space-y-4 border-[1.5px] border-border-card">
             <div className="flex items-start justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-extrabold text-content-primary">
                   Jadwalkan Kunjungan Lapangan POPT
                 </h2>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-content-muted mt-0.5">
                   Tindak lanjut laporan gejala berat (Kode 2) di wilayah binaan.
                 </p>
               </div>
               <button
                 onClick={() => setSelectedReport(null)}
-                className="min-h-[44px] min-w-[44px] text-slate-400 hover:text-slate-600 inline-flex items-center justify-center rounded-lg"
+                className="min-h-[44px] min-w-[44px] text-content-muted hover:text-content-primary hover:bg-surface-subtle inline-flex items-center justify-center rounded-xl transition-colors"
                 aria-label="Tutup dialog"
               >
-                ✕
+                <StatusIcon name="x" className="w-5 h-5" />
               </button>
             </div>
 
@@ -485,10 +491,10 @@ export function ReportsClient({ userRole = "ppl" }: ReportsClientProps) {
               </div>
               <button
                 onClick={() => setShowSimModal(false)}
-                className="min-h-[44px] min-w-[44px] text-slate-400 hover:text-slate-600 inline-flex items-center justify-center rounded-lg"
+                className="min-h-[44px] min-w-[44px] text-content-muted hover:text-content-primary hover:bg-surface-subtle inline-flex items-center justify-center rounded-xl transition-colors"
                 aria-label="Tutup dialog"
               >
-                ✕
+                <StatusIcon name="x" className="w-5 h-5" />
               </button>
             </div>
 

@@ -27,37 +27,62 @@ import {
   EyeOff,
   AlertCircle,
   CheckCircle2,
+  X,
+  LayoutDashboard,
+  Map,
+  BarChart3,
+  LogOut,
+  Radio,
+  ChevronRight,
+  RefreshCw,
+  CheckCheck,
+  Sprout,
+  TrendingUp,
   type LucideProps,
 } from "lucide-react";
 
-export type IconName =
-  | "shield-check"
-  | "triangle-alert"
-  | "shield-alert"
-  | "thermometer"
-  | "droplet"
-  | "cloud-rain"
-  | "user-check"
-  | "send"
-  | "pencil"
-  | "map-pin"
-  | "users"
-  | "file-text"
-  | "sliders"
-  | "message-square"
-  | "check"
-  | "clock"
-  | "filter"
-  | "upload"
-  | "plus"
-  | "arrow-right"
-  | "calendar"
-  | "download"
-  | "activity"
-  | "eye"
-  | "eye-off"
-  | "alert-circle"
-  | "check-circle-2";
+const ICONS = {
+  "shield-check": ShieldCheck,
+  "triangle-alert": TriangleAlert,
+  "shield-alert": ShieldAlert,
+  thermometer: Thermometer,
+  droplet: Droplet,
+  "cloud-rain": CloudRain,
+  "user-check": UserCheck,
+  send: Send,
+  pencil: Pencil,
+  "map-pin": MapPin,
+  users: Users,
+  "file-text": FileText,
+  sliders: Sliders,
+  "message-square": MessageSquare,
+  check: Check,
+  clock: Clock,
+  filter: Filter,
+  upload: Upload,
+  plus: Plus,
+  "arrow-right": ArrowRight,
+  calendar: Calendar,
+  download: Download,
+  activity: Activity,
+  eye: Eye,
+  "eye-off": EyeOff,
+  "alert-circle": AlertCircle,
+  "check-circle-2": CheckCircle2,
+  x: X,
+  "layout-dashboard": LayoutDashboard,
+  map: Map,
+  "bar-chart-3": BarChart3,
+  "log-out": LogOut,
+  radio: Radio,
+  "chevron-right": ChevronRight,
+  "refresh-cw": RefreshCw,
+  "check-check": CheckCheck,
+  sprout: Sprout,
+  "trending-up": TrendingUp,
+} satisfies Record<string, React.ComponentType<LucideProps>>;
+
+export type IconName = keyof typeof ICONS;
 
 interface StatusIconProps extends Omit<LucideProps, "ref"> {
   name: IconName;
@@ -72,70 +97,14 @@ export function StatusIcon({
   strokeWidth = 2,
   ...props
 }: StatusIconProps) {
-  const iconProps = {
-    className,
-    size,
-    strokeWidth,
-    "aria-hidden": true,
-    ...props,
-  };
-
-  switch (name) {
-    case "shield-check":
-      return <ShieldCheck {...iconProps} />;
-    case "triangle-alert":
-      return <TriangleAlert {...iconProps} />;
-    case "shield-alert":
-      return <ShieldAlert {...iconProps} />;
-    case "thermometer":
-      return <Thermometer {...iconProps} />;
-    case "droplet":
-      return <Droplet {...iconProps} />;
-    case "cloud-rain":
-      return <CloudRain {...iconProps} />;
-    case "user-check":
-      return <UserCheck {...iconProps} />;
-    case "send":
-      return <Send {...iconProps} />;
-    case "pencil":
-      return <Pencil {...iconProps} />;
-    case "map-pin":
-      return <MapPin {...iconProps} />;
-    case "users":
-      return <Users {...iconProps} />;
-    case "file-text":
-      return <FileText {...iconProps} />;
-    case "sliders":
-      return <Sliders {...iconProps} />;
-    case "message-square":
-      return <MessageSquare {...iconProps} />;
-    case "check":
-      return <Check {...iconProps} />;
-    case "clock":
-      return <Clock {...iconProps} />;
-    case "filter":
-      return <Filter {...iconProps} />;
-    case "upload":
-      return <Upload {...iconProps} />;
-    case "plus":
-      return <Plus {...iconProps} />;
-    case "arrow-right":
-      return <ArrowRight {...iconProps} />;
-    case "calendar":
-      return <Calendar {...iconProps} />;
-    case "download":
-      return <Download {...iconProps} />;
-    case "activity":
-      return <Activity {...iconProps} />;
-    case "eye":
-      return <Eye {...iconProps} />;
-    case "eye-off":
-      return <EyeOff {...iconProps} />;
-    case "alert-circle":
-      return <AlertCircle {...iconProps} />;
-    case "check-circle-2":
-      return <CheckCircle2 {...iconProps} />;
-    default:
-      return <ShieldCheck {...iconProps} />;
-  }
+  const IconComponent = ICONS[name] ?? ShieldCheck;
+  return (
+    <IconComponent
+      className={className}
+      size={size}
+      strokeWidth={strokeWidth}
+      aria-hidden="true"
+      {...props}
+    />
+  );
 }

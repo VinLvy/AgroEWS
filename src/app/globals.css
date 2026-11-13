@@ -11,4 +11,59 @@
   .bottom-safe {
     bottom: env(safe-area-inset-bottom, 0px);
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Accessible Leaflet container & custom DivIcon styling (WCAG 2.1 AA) */
+.agro-leaflet-surface.leaflet-container {
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  background-color: #e6efe7;
+}
+
+.agro-map-pill-icon,
+.agro-farmer-pin-icon {
+  background: transparent;
+  border: none;
+}
+
+.agro-leaflet-surface .leaflet-control-zoom a {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  font-weight: 700;
+}
+
+.agro-leaflet-surface .leaflet-control-zoom a:hover {
+  background-color: #f0f5f0;
+  color: #15803d;
+}
+
+.agro-leaflet-surface .leaflet-control-attribution {
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-top-left-radius: 8px;
+}
+
+.agro-leaflet-surface .leaflet-control-attribution a {
+  color: #1e3a8a;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.agro-leaflet-surface .leaflet-control-scale-line {
+  background-color: rgba(255, 255, 255, 0.94);
+  color: #0f172a;
+  border-color: #334155;
+  font-weight: 700;
 }

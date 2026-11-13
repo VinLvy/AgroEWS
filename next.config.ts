@@ -4,9 +4,9 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
-  img-src 'self' data: blob:;
+  img-src 'self' data: blob: https://*.arcgisonline.com https://*.tile.openstreetmap.org;
   font-src 'self' data:;
-  connect-src 'self';
+  connect-src 'self' https://*.arcgisonline.com https://*.tile.openstreetmap.org;
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
@@ -40,6 +40,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
+  serverExternalPackages: ["argon2"],
   reactStrictMode: true,
   poweredByHeader: false,
   async headers() {

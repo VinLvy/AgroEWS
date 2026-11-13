@@ -82,16 +82,16 @@ export function VerificationBar({
     : "";
 
   return (
-    <div className="bg-surface-card border-t-[1.5px] border-border-card p-4 sm:p-5 sticky bottom-0 z-40 shadow-lg safe-bottom">
+    <div className="bg-white/95 backdrop-blur border-[1.5px] border-border-card rounded-2xl p-4 sm:p-5 sticky bottom-3 z-30 shadow-bento-lg safe-bottom">
       <div className="max-w-5xl mx-auto space-y-4">
         {/* Toggle Editor Teks Rekomendasi */}
         {isEditing && (
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex justify-between items-center text-xs text-content-secondary">
-              <label htmlFor="edited-text" className="font-semibold">
+              <label htmlFor="edited-text" className="font-bold">
                 Koreksi Anjuran Teknis (Maksimal 1500 Karakter):
               </label>
-              <span className={editedText.length > 1400 ? "text-status-red-text font-bold" : ""}>
+              <span className={editedText.length > 1400 ? "text-status-red-text font-bold" : "font-mono font-semibold"}>
                 {editedText.length}/1500
               </span>
             </div>
@@ -100,7 +100,7 @@ export function VerificationBar({
               rows={3}
               value={editedText}
               onChange={handleTextChange}
-              className="w-full text-xs font-mono rounded-lg border-[1.5px] border-border-strong p-3 focus:ring-2 focus:ring-agri-700 focus:outline-none"
+              className="w-full text-xs font-mono rounded-xl border-[1.5px] border-border-strong bg-surface-subtle/50 p-3 focus:ring-2 focus:ring-agri-700 focus:outline-none"
             />
             {textError && <p className="text-xs text-status-red-text font-semibold">{textError}</p>}
           </div>
@@ -116,7 +116,7 @@ export function VerificationBar({
               id="crop-phase-select"
               value={selectedPhase}
               onChange={(e) => setSelectedPhase(e.target.value as CropPhase)}
-              className="w-full min-h-touch px-3 py-2 text-sm font-semibold rounded-lg border-[1.5px] border-border-strong bg-surface-card text-content-primary focus:ring-2 focus:ring-agri-700 focus:outline-none"
+              className="w-full min-h-touch px-3.5 py-2 text-sm font-bold rounded-xl border-[1.5px] border-border-strong bg-surface-card text-content-primary focus:ring-2 focus:ring-agri-700 focus:outline-none"
             >
               <option value="">-- Wajib Pilih Fase Tanaman --</option>
               {CROP_PHASES.map((p) => (
@@ -132,7 +132,7 @@ export function VerificationBar({
             <button
               type="button"
               onClick={() => setIsEditing(!isEditing)}
-              className="min-h-touch px-3.5 py-2 rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-800 hover:text-slate-950 active:bg-slate-300 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors"
+              className="min-h-touch px-4 py-2 rounded-xl border-[1.5px] border-border-card bg-surface-subtle hover:bg-slate-200 text-content-primary text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-agri-700"
             >
               <StatusIcon name="pencil" size={16} />
               {isEditing ? "Tutup Editor" : "Edit Anjuran"}
@@ -142,7 +142,7 @@ export function VerificationBar({
               type="button"
               onClick={() => setHoldModalOpen(true)}
               disabled={isLoading}
-              className="min-h-touch px-4 py-2 rounded-lg border-[1.5px] border-status-amber-border bg-status-amber-bg text-status-amber-text hover:bg-amber-100 text-xs sm:text-sm font-bold flex items-center gap-1.5"
+              className="min-h-touch px-4 py-2 rounded-xl border-[1.5px] border-status-amber-border bg-status-amber-bg text-status-amber-text hover:bg-amber-100 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-600"
             >
               <StatusIcon name="triangle-alert" size={16} />
               Tahan / Batal
@@ -152,7 +152,7 @@ export function VerificationBar({
               type="button"
               onClick={() => setPreviewModalOpen(true)}
               disabled={!selectedPhase || isLoading || !!textError}
-              className="min-h-touch px-5 py-2 rounded-lg bg-agri-700 hover:bg-agri-900 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm"
+              className="min-h-touch px-5 py-2 rounded-xl bg-agri-700 hover:bg-agri-800 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-agri-700"
             >
               <StatusIcon name="send" size={16} />
               Setujui & Siarkan ({recipientCount} Penerima)

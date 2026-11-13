@@ -14,13 +14,15 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="min-h-screen bg-[var(--surface-ground)] flex flex-col text-[var(--text-primary)]">
+    <div className="min-h-screen bg-surface-canvas flex flex-col text-content-primary">
       <Navbar
         userName={session.user.name || "Petugas Lapangan"}
         userRole={session.user.role}
       />
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-8">
-        {children}
+      <main className="flex-1 w-full lg:pl-[276px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 sm:pb-10">
+          {children}
+        </div>
       </main>
     </div>
   );

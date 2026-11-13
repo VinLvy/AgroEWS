@@ -38,10 +38,12 @@ export function HoldDraftModal({
       aria-labelledby="hold-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
     >
-      <div className="bg-surface-card rounded-2xl border-[1.5px] border-border-card max-w-lg w-full p-6 shadow-xl">
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card max-w-lg w-full p-6 shadow-bento-lg">
         <div className="flex items-center gap-3 text-status-amber-text mb-4">
-          <StatusIcon name="triangle-alert" size={24} />
-          <h2 id="hold-modal-title" className="text-lg font-bold text-content-primary">
+          <div className="w-10 h-10 rounded-xl bg-status-amber-bg border border-status-amber-border flex items-center justify-center shrink-0">
+            <StatusIcon name="triangle-alert" size={20} />
+          </div>
+          <h2 id="hold-modal-title" className="text-lg font-extrabold text-content-primary">
             Tahan / Batalkan Siaran Peringatan
           </h2>
         </div>

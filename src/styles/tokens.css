@@ -1,44 +1,50 @@
-/* tokens.css - AgroEWS Field Design System (FDS) v1.0.0 */
-/* Menggabungkan Design_System_AgroEWS.md Bagian 2 & 3 dengan Koreksi TECH_SPEC.md §12.2 */
+/* tokens.css - AgroEWS Hybrid AgriCore + Field Design System (FDS) v2.0.0 */
+/* Selaras Design_System_AgroEWS.md v2, Referensi Behance AgriCore, & TECH_SPEC.md §12.2 */
 
 :root {
-  /* 2.1 Palet Utama (Brand & Surface) */
+  /* 2.1 Palet Utama (AgriCore Leaf Green + High-Contrast Field Surface) */
   --agri-primary-900: #064E3B;
-  --agri-primary-700: #047857;
-  --agri-primary-500: #10B981;
+  --agri-primary-800: #166534;
+  --agri-primary-700: #15803D;
+  --agri-primary-600: #16A34A;
+  --agri-primary-500: #22C55E;
+  --agri-primary-100: #DCFCE7;
   --agri-primary-50: #ECFDF5;
 
-  --surface-canvas: #F8FAFC;
+  /* Permukaan Bento (AgriCore Mint-Gray Canvas + White Bento Cards) */
+  --surface-canvas: #F4F7F4;
+  --surface-ground: #F4F7F4;
+  --surface-subtle: #F0F5F0;
   --surface-card: #FFFFFF;
-  --border-subtle: #E2E8F0;
-  
+  --border-subtle: #E2E8E2;
+
   /* Koreksi §12.2: Border input form minimal 3:1 WCAG 1.4.11 */
   --border-strong: #64748B;
   /* Koreksi §12.2: Border kartu anti-silau */
-  --border-card: #94A3B8;
+  --border-card: #CBD5E1;
 
   --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #64748B;
+  --text-secondary: #334155;
+  --text-muted: #526071;
 
-  /* 2.2 Token Status Risiko (Agro-Risk Severity Tokens) */
+  /* 2.2 Token Status Risiko (Agro-Risk Severity Tokens - WCAG AA Compliant) */
   /* Status HIJAU - Risiko Rendah */
   --status-green-bg: #F0FDF4;
-  --status-green-border: #BBF7D0;
+  --status-green-border: #86EFAC;
   --status-green-text: #166534;
-  --status-green-accent: #22C55E;
+  --status-green-accent: #16A34A;
 
   /* Status KUNING - Risiko Waspada */
   --status-amber-bg: #FFFBEB;
-  --status-amber-border: #FDE68A;
+  --status-amber-border: #FCD34D;
   --status-amber-text: #92400E;
-  --status-amber-accent: #F59E0B;
+  --status-amber-accent: #D97706;
 
   /* Status MERAH - Risiko Bahaya */
   --status-red-bg: #FEF2F2;
-  --status-red-border: #FECACA;
+  --status-red-border: #FCA5A5;
   --status-red-text: #991B1B;
-  --status-red-accent: #EF4444;
+  --status-red-accent: #DC2626;
 
   /* Area sentuh interaktif lapangan */
   --touch-target-min: 48px;
@@ -47,10 +53,10 @@
 body {
   background-color: var(--surface-canvas);
   color: var(--text-primary);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 code, pre, .font-mono {
-  font-family: var(--font-jetbrains-mono), "Courier New", monospace;
+  font-family: "JetBrains Mono", "Cascadia Mono", "Consolas", "Courier New", monospace;
 }

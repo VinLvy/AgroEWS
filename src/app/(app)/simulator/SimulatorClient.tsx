@@ -129,30 +129,33 @@ export function SimulatorClient() {
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-subtle pb-5">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <span className="text-xs font-bold uppercase tracking-wider text-agri-700 block mb-1">
+            Diseminasi Multi-Kanal Ramah Fitur Phone
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-content-primary">
             Simulator Pesan Petani (WhatsApp &amp; Telegram)
           </h1>
-          <p className="text-sm text-slate-600 mt-1">
+          <p className="text-sm text-content-muted mt-1">
             Uji interaksi dua arah penerimaan draf siaran dan pelaporan balik ground-truthing tanpa butuh API eksternal.
           </p>
         </div>
 
         {/* Channel Selector */}
-        <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg">
+        <div className="flex items-center gap-1.5 bg-surface-subtle p-1.5 rounded-2xl border border-border-subtle">
           <button
             onClick={() => setChannel("whatsapp")}
-            className={`min-h-[44px] px-4 py-1.5 rounded-md text-xs font-bold transition-colors ${
-              channel === "whatsapp" ? "bg-emerald-700 text-white shadow-xs" : "text-slate-700"
+            className={`min-h-[48px] px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              channel === "whatsapp" ? "bg-agri-700 text-white shadow-sm" : "text-content-secondary hover:text-content-primary"
             }`}
           >
             WhatsApp Mode
           </button>
           <button
             onClick={() => setChannel("telegram")}
-            className={`min-h-[44px] px-4 py-1.5 rounded-md text-xs font-bold transition-colors ${
-              channel === "telegram" ? "bg-blue-600 text-white shadow-xs" : "text-slate-700"
+            className={`min-h-[48px] px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              channel === "telegram" ? "bg-blue-700 text-white shadow-sm" : "text-content-secondary hover:text-content-primary"
             }`}
           >
             Telegram Mode
@@ -162,15 +165,15 @@ export function SimulatorClient() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Interactive Virtual Phone Mockup */}
-        <div className="lg:col-span-2 flex justify-center">
-          <div className="w-full max-w-md bg-slate-900 rounded-[36px] p-3 shadow-2xl border-4 border-slate-800">
+        <div className="lg:col-span-2 flex justify-center bg-surface-card border-[1.5px] border-border-card rounded-3xl p-6 shadow-bento">
+          <div className="w-full max-w-md bg-slate-900 rounded-[40px] p-3.5 shadow-bento-lg border-4 border-slate-800">
             {/* Phone Screen Container */}
-            <div className="bg-[#EFEAE2] rounded-[28px] overflow-hidden flex flex-col h-[580px]">
+            <div className="bg-[#EFEAE2] rounded-[30px] overflow-hidden flex flex-col h-[590px]">
               {/* Phone Status Bar */}
-              <div className="bg-slate-800 text-white px-6 py-1.5 text-[11px] font-mono flex justify-between items-center">
-                <span>09:41</span>
-                <span>AgroEWS Bot Active</span>
-                <span>4G 100%</span>
+              <div className="bg-slate-900 text-white px-6 py-2 text-[11px] font-mono flex justify-between items-center">
+                <span>09:41 WIB</span>
+                <span className="text-emerald-300 font-bold">AgroEWS Bot Live</span>
+                <span>4G</span>
               </div>
 
               {/* Chat Header */}
@@ -265,12 +268,12 @@ export function SimulatorClient() {
         </div>
 
         {/* Right: Quick Action Testing Panel */}
-        <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs space-y-4">
-          <div className="border-b border-slate-100 pb-3">
-            <h2 className="text-base font-bold text-slate-900">
+        <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card p-5 sm:p-6 shadow-bento space-y-4">
+          <div className="border-b border-border-subtle pb-3">
+            <h2 className="text-base font-extrabold text-content-primary">
               Tombol Aksi Uji Cepat (Testing Shortcuts)
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs font-medium text-content-muted mt-0.5">
               Klik salah satu tombol di bawah untuk menyimulasikan respon petani secara instan:
             </p>
           </div>
@@ -278,69 +281,71 @@ export function SimulatorClient() {
           <div className="space-y-2.5">
             <button
               onClick={() => handleSendMessage("LAPOR Dusun-2 2")}
-              className="w-full text-left p-3 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 transition-colors"
+              className="w-full min-h-[48px] text-left p-3.5 rounded-2xl border-[1.5px] border-status-red-border bg-status-red-bg hover:bg-red-100 transition-colors"
             >
-              <div className="text-xs font-bold text-red-900 font-mono">
+              <div className="text-xs font-extrabold text-status-red-text font-mono">
                 LAPOR Dusun-2 2
               </div>
-              <div className="text-[11px] text-red-700 mt-0.5">
+              <div className="text-[11px] text-red-800 mt-0.5 font-medium">
                 Simulasi temuan wereng berat (&gt;=5 ekor/rumpun) &rarr; memicu jadwal POPT di feed.
               </div>
             </button>
 
             <button
               onClick={() => handleSendMessage("LAPOR Dusun-1 1")}
-              className="w-full text-left p-3 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors"
+              className="w-full min-h-[48px] text-left p-3.5 rounded-2xl border-[1.5px] border-status-amber-border bg-status-amber-bg hover:bg-amber-100 transition-colors"
             >
-              <div className="text-xs font-bold text-amber-900 font-mono">
+              <div className="text-xs font-extrabold text-status-amber-text font-mono">
                 LAPOR Dusun-1 1
               </div>
-              <div className="text-[11px] text-amber-800 mt-0.5">
+              <div className="text-[11px] text-amber-900 mt-0.5 font-medium">
                 Simulasi temuan waspada (1-4 ekor/rumpun).
               </div>
             </button>
 
             <button
               onClick={() => handleSendMessage("LAPOR Dusun-3 0")}
-              className="w-full text-left p-3 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors"
+              className="w-full min-h-[48px] text-left p-3.5 rounded-2xl border-[1.5px] border-status-green-border bg-status-green-bg hover:bg-emerald-100 transition-colors"
             >
-              <div className="text-xs font-bold text-emerald-900 font-mono">
+              <div className="text-xs font-extrabold text-status-green-text font-mono">
                 LAPOR Dusun-3 0
               </div>
-              <div className="text-[11px] text-emerald-800 mt-0.5">
+              <div className="text-[11px] text-agri-800 mt-0.5 font-medium">
                 Simulasi kondisi petak aman (0 ekor).
               </div>
             </button>
 
             <button
               onClick={() => handleSendMessage("STOP")}
-              className="w-full text-left p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors"
+              className="w-full min-h-[48px] text-left p-3.5 rounded-2xl border-[1.5px] border-border-card bg-surface-subtle hover:bg-slate-200 transition-colors"
             >
-              <div className="text-xs font-bold text-slate-900 font-mono">
+              <div className="text-xs font-extrabold text-content-primary font-mono">
                 STOP
               </div>
-              <div className="text-[11px] text-slate-600 mt-0.5">
+              <div className="text-[11px] text-content-secondary mt-0.5 font-medium">
                 Simulasi opt-out instan petani dari pengiriman pesan siaran (§11).
               </div>
             </button>
 
             <button
               onClick={() => handleSendMessage("BANTUAN")}
-              className="w-full text-left p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors"
+              className="w-full min-h-[48px] text-left p-3.5 rounded-2xl border-[1.5px] border-border-card bg-surface-subtle hover:bg-slate-200 transition-colors"
             >
-              <div className="text-xs font-bold text-slate-900 font-mono">
+              <div className="text-xs font-extrabold text-content-primary font-mono">
                 BANTUAN
               </div>
-              <div className="text-[11px] text-slate-600 mt-0.5">
+              <div className="text-[11px] text-content-secondary mt-0.5 font-medium">
                 Melihat panduan sintaks format pelaporan otomatis.
               </div>
             </button>
           </div>
 
-          <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600 space-y-1">
-            <div className="font-semibold text-slate-800">Kepatuhan Kebijakan:</div>
+          <div className="p-4 bg-gradient-to-br from-agri-700 to-agri-900 rounded-2xl text-white text-xs space-y-1.5">
+            <div className="font-extrabold uppercase tracking-wider text-emerald-100">
+              Kepatuhan Kebijakan:
+            </div>
             <div>&bull; Zero-Emoji Policy terjamin pada seluruh template pesan.</div>
-            <div>&bull; Batasan lebar karakter maksimum 38 untuk keterbacaan di HP jadul/fitur.</div>
+            <div>&bull; Lebar karakter maks 38 kolom untuk keterbacaan di feature phone.</div>
             <div>&bull; Idempoten: pesan berulang tidak menduplikasi antrean.</div>
           </div>
         </div>

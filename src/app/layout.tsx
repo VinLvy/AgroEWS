@@ -13,10 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <head>
-        <title>AgroEWS - Sistem Peringatan Dini Agroklimat</title>
-      </head>
-      <body className="antialiased min-h-screen bg-surface-canvas text-content-primary">
+      <body className="antialiased min-h-screen bg-surface-canvas text-content-primary font-sans">
         {children}
       </body>
     </html>

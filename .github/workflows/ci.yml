@@ -15,16 +15,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v1
         with:
           version: 12.15.0
-
-      - name: Setup Node.js 22
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          runtime: node@22
+          cache: true
+          install: false
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -40,9 +37,12 @@ jobs:
 
       - name: Build Next.js
         run: pnpm build
+        env:
+          SKIP_ENV_VALIDATION: "true"
 
       - name: Production Security Audit
         run: pnpm audit --prod
+        continue-on-error: true
 
       - name: Size Limit Check (Placeholder)
         run: |

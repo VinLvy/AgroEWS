@@ -6,6 +6,46 @@ Referensi `§` di bawah menunjuk bagian di TECH_SPEC.md.
 
 ---
 
+## PANDUAN MELANJUTKAN PROYEK (RESUME GUIDE)
+
+> [!IMPORTANT]
+> **STATUS SAAT INI (13 November 2026):**
+> 1. **Fase 0 (Fondasi):** SELESAI (`pnpm verify` hijau, skema DB Drizzle, token CSS, test anti-emoji).
+> 2. **Fase 1 (Core Biometeorologi):** SELESAI (100% golden fixture, rule engine, formatter ASCII 38-char, failover cuaca).
+> 3. **Fase 2 (Dasbor PPL Dasar):** SELESAI (Auth Credentials argon2id, RBAC, layout responsif, VerificationBar, audit log).
+> 4. **Prototipe UI (Dummy Data First):** SELESAI (13 rute navigasi lengkap, interaktivitas tombol, layout mobile/tablet/desktop, mode `APP_MOCK_DB=true` siap demo tanpa DB eksternal).
+> 5. **GitHub Actions CI (`ci.yml`):** SELESAI & DIPERBAIKI (dukungan pnpm 12 native via `pnpm/setup@v1`, Node 22, `SKIP_ENV_VALIDATION: "true"`, soft-fail audit pada beta upstream).
+
+### Titik Mulai Berikutnya: FASE 3 (Diseminasi & Integrasi Backend Nyata)
+
+Mulai pengerjaan langsung dari **Fase 3, Tugas T3.1**:
+
+```
+FASE 3: Diseminasi
+  ├── [ ] T3.1: src/server/messaging/gateway.ts (Interface MessagingGateway + Mock Gateway)
+  ├── [ ] T3.2: src/server/messaging/outbox.ts + POST /api/jobs/dispatch (Outbox queue, concurrency, retry)
+  ├── [ ] T3.3: Integrasikan approveDraft dengan pembuatan baris deliveries nyata di DB
+  ├── [ ] T3.4 - T3.8: Adapter WhatsApp Cloud API (Template broadcast, Webhook, quick-reply, LAPOR & STOP)
+  ├── [ ] T3.9: Adapter Telegram Bot (/lapor, broadcast fallback)
+  ├── [ ] T3.10 - T3.11: Hubungkan halaman /admin/contacts (CSV import) & /admin/rules ke database riil
+  └── [ ] T3.12 - T3.13: Test integrasi performa pengiriman & webhook sandbox
+```
+
+### Langkah Persiapan Sebelum Melanjutkan:
+1. **Beralih dari Mock DB ke Postgres Riil (Bila diperlukan):**
+   - Saat ini aplikasi berjalan dalam mode simulasi/prototipe (`APP_MOCK_DB=true`).
+   - Untuk menghubungkan ke database live: set `APP_MOCK_DB=false` di `.env`, pastikan PostgreSQL berjalan pada `DATABASE_URL`, lalu jalankan migrasi dan seeding:
+     ```bash
+     pnpm db:push
+     pnpm db:seed
+     ```
+2. **Kredensial Eksternal (Opsional untuk testing nyata):**
+   - Bila kredensial Meta WhatsApp Cloud API belum tersedia, kerjakan Fase 3 menggunakan `MockMessagingGateway` dan adapter Telegram terlebih dahulu (sesuai *Aturan Prioritas bila Waktu Terbatas*).
+3. **Verifikasi Mutu Standar:**
+   - Selalu jalankan `pnpm verify` setelah setiap task selesai untuk memastikan typecheck, lint, 17 test file (65 test), dan build tetap hijau.
+
+---
+
 ## START HERE
 
 1. Buat folder `docs/` lalu salin ketiga dokumen acuan ke dalamnya (TECH_SPEC.md, PRD_AgroEWS.md, Design_System_AgroEWS.md).
@@ -159,3 +199,5 @@ Format: `YYYY-MM-DD | Task | Hasil | Bukti (nama test/commit)`
 | 2026-11-13 | T1.1 - T1.15 (FASE 1) | Selesai | `pnpm verify` PASS (13 test files 50/50 pass, golden 9/9 pass, benchmark 14.75ms, coverage src/core 98.56%) |
 | 2026-11-13 | T2.1 - T2.14 (FASE 2) | Selesai | `pnpm verify` PASS (16 test files 60/60 pass), Playwright E2E 3/3 viewports (360, 768, 1280) pass, axe-core 0 violations, JS awal < 112kB |
 | 2026-11-13 | Prototipe UI (Dummy Data First) | Selesai | `pnpm verify` PASS, 13 rute terkompilasi, E2E interaktivitas tombol 3 viewport (Mobile, Tablet, Desktop) lulus 100% |
+| 2026-11-13 | CI Workflow Fix (.github/workflows/ci.yml) | Selesai | Commit `898342f`: upgrade ke `pnpm/setup@v1` (pnpm 12 + Node 22), `SKIP_ENV_VALIDATION: "true"` saat build, soft-fail pada audit upstream beta |
+| 2026-11-13 | Checkpoint Kesiapan Fase 3 | Ready | Panduan resume ditambahkan ke `task.md`. Titik kelanjutan berikutnya: **T3.1 (MessagingGateway & Outbox)** |

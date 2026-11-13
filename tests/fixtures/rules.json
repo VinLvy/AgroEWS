@@ -1,0 +1,150 @@
+{
+  "thresholds": {
+    "window": { "pastDays": 2, "forecastDays": 3 },
+    "green": { "tBelow": 22, "tAbove": 32, "rhBelow": 70 },
+    "amber": {
+      "tMin": 24,
+      "tMax": 29,
+      "rhMin": 70,
+      "minConsecutiveDays": 2,
+      "rainMinMm": 1,
+      "rainMaxMm": 5,
+      "requireRain": false
+    },
+    "red": {
+      "tMin": 25,
+      "tMax": 29,
+      "rhGt": 80,
+      "minConsecutiveDays": 3
+    }
+  },
+  "today": "2026-11-14",
+  "fixtures": [
+    {
+      "id": 1,
+      "description": "(26.8, 86) x 6 -> red (Run merah >= 3)",
+      "sequence": [
+        { "offset": -2, "tMean": 26.8, "rhMean": 86 },
+        { "offset": -1, "tMean": 26.8, "rhMean": 86 },
+        { "offset": 0, "tMean": 26.8, "rhMean": 86 },
+        { "offset": 1, "tMean": 26.8, "rhMean": 86 },
+        { "offset": 2, "tMean": 26.8, "rhMean": 86 },
+        { "offset": 3, "tMean": 26.8, "rhMean": 86 }
+      ],
+      "expectedStatus": "red",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 2,
+      "description": "D..D+1 (26.8, 86), lainnya (20, 60) -> amber (Run kuning 2, merah hanya 2)",
+      "sequence": [
+        { "offset": -2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": -1, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 0, "tMean": 26.8, "rhMean": 86 },
+        { "offset": 1, "tMean": 26.8, "rhMean": 86 },
+        { "offset": 2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 3, "tMean": 20.0, "rhMean": 60 }
+      ],
+      "expectedStatus": "amber",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 3,
+      "description": "hanya D (26, 86), lainnya (20, 60) -> green (Run kuning 1)",
+      "sequence": [
+        { "offset": -2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": -1, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 0, "tMean": 26.0, "rhMean": 86 },
+        { "offset": 1, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 3, "tMean": 20.0, "rhMean": 60 }
+      ],
+      "expectedStatus": "green",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 4,
+      "description": "(33, 90) x 6 -> green (T > 32)",
+      "sequence": [
+        { "offset": -2, "tMean": 33.0, "rhMean": 90 },
+        { "offset": -1, "tMean": 33.0, "rhMean": 90 },
+        { "offset": 0, "tMean": 33.0, "rhMean": 90 },
+        { "offset": 1, "tMean": 33.0, "rhMean": 90 },
+        { "offset": 2, "tMean": 33.0, "rhMean": 90 },
+        { "offset": 3, "tMean": 33.0, "rhMean": 90 }
+      ],
+      "expectedStatus": "green",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 5,
+      "description": "(23, 85) x 6 -> green + reason marginal (A-03)",
+      "sequence": [
+        { "offset": -2, "tMean": 23.0, "rhMean": 85 },
+        { "offset": -1, "tMean": 23.0, "rhMean": 85 },
+        { "offset": 0, "tMean": 23.0, "rhMean": 85 },
+        { "offset": 1, "tMean": 23.0, "rhMean": 85 },
+        { "offset": 2, "tMean": 23.0, "rhMean": 85 },
+        { "offset": 3, "tMean": 23.0, "rhMean": 85 }
+      ],
+      "expectedStatus": "green",
+      "hasMarginalReason": true
+    },
+    {
+      "id": 6,
+      "description": "(24.5, 85) x 6 -> amber (T < 25 bukan merah, tapi amberDay)",
+      "sequence": [
+        { "offset": -2, "tMean": 24.5, "rhMean": 85 },
+        { "offset": -1, "tMean": 24.5, "rhMean": 85 },
+        { "offset": 0, "tMean": 24.5, "rhMean": 85 },
+        { "offset": 1, "tMean": 24.5, "rhMean": 85 },
+        { "offset": 2, "tMean": 24.5, "rhMean": 85 },
+        { "offset": 3, "tMean": 24.5, "rhMean": 85 }
+      ],
+      "expectedStatus": "amber",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 7,
+      "description": "(27, 65) x 6 -> green (RH < 70)",
+      "sequence": [
+        { "offset": -2, "tMean": 27.0, "rhMean": 65 },
+        { "offset": -1, "tMean": 27.0, "rhMean": 65 },
+        { "offset": 0, "tMean": 27.0, "rhMean": 65 },
+        { "offset": 1, "tMean": 27.0, "rhMean": 65 },
+        { "offset": 2, "tMean": 27.0, "rhMean": 65 },
+        { "offset": 3, "tMean": 27.0, "rhMean": 65 }
+      ],
+      "expectedStatus": "green",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 8,
+      "description": "D..D+1 (27, 75), lainnya (20, 60) -> amber (Run kuning 2)",
+      "sequence": [
+        { "offset": -2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": -1, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 0, "tMean": 27.0, "rhMean": 75 },
+        { "offset": 1, "tMean": 27.0, "rhMean": 75 },
+        { "offset": 2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 3, "tMean": 20.0, "rhMean": 60 }
+      ],
+      "expectedStatus": "amber",
+      "hasMarginalReason": false
+    },
+    {
+      "id": 9,
+      "description": "D-2..D-1 (27, 85), lainnya (20, 60) -> green (Run hanya masa lalu, tidak beririsan)",
+      "sequence": [
+        { "offset": -2, "tMean": 27.0, "rhMean": 85 },
+        { "offset": -1, "tMean": 27.0, "rhMean": 85 },
+        { "offset": 0, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 1, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 2, "tMean": 20.0, "rhMean": 60 },
+        { "offset": 3, "tMean": 20.0, "rhMean": 60 }
+      ],
+      "expectedStatus": "green",
+      "hasMarginalReason": false
+    }
+  ]
+}

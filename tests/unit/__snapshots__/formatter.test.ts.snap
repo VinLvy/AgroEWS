@@ -1,0 +1,44 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`T1.7: Formatter Tests (TECH_SPEC.md §8.4 & §8.5) > snapshot test pesan WhatsApp 1`] = `
+"\`\`\`
+PERINGATAN DINI AGROKLIMAT
+SISTEM MITIGASI HAMA WERENG COKELAT
+Wilayah : Kecamatan Kuranji
+Tanggal : 14 Nov 2026
+--------------------------------------
+[STATUS: MERAH - BAHAYA]
+--------------------------------------
+PARAMETER CUACA (BMKG & Open-Meteo):
+- Suhu Rerata : 26.8 C
+- Kelembapan  : 86%
+- Rangkaian   : 3 hari beruntun
+- Pola Cuaca  : Hujan berselang terik
+--------------------------------------
+REKOMENDASI TINDAKAN DARURAT:
+1. Lakukan pengamatan serempak pada
+   pangkal batang padi seluruh anggota
+   poktan.
+2. Keringkan petakan sawah 3-4 hari
+   untuk menekan kelembapan mikro
+   rumpun padi.
+3. Jika populasi wereng >= 5
+   ekor/rumpun pada fase vegetatif,
+   segera laporkan ke POPT dan
+   aplikasikan agens hayati Beauveria
+   bassiana.
+4. JANGAN gunakan insektisida
+   piretroid sintetis yang memicu
+   resurgensi hama.
+--------------------------------------
+KONFIRMASI LAPANGAN:
+Balas pesan ini untuk melapor sawah:
+Ketik: LAPOR [Nama Dusun] [Kode]
+[0] Aman (Wereng nihil)
+[1] Waspada (1-4 ekor/rumpun)
+[2] Bahaya (5 ekor ke atas)
+Contoh: LAPOR Dusun-Dua 1
+======================================
+Telah divalidasi: Budi Santoso, S.P.
+\`\`\`"
+`;

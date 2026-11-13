@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`T1.5: Explainability Engine Tests (TECH_SPEC.md §6.4) > menghasilkan penjelasan status HIJAU (marginal) 1`] = `"Status HIJAU (AMAN) dengan catatan marginal pada (14 Nov). Suhu berada di batas toleransi namun kelembapan cukup tinggi, disarankan pemantauan rutin."`;
+
+exports[`T1.5: Explainability Engine Tests (TECH_SPEC.md §6.4) > menghasilkan penjelasan status KUNING secara naratif 1`] = `"Suhu rerata 26.0 C dan kelembapan memicu status KUNING (WASPADA) pada 2 hari berturut-turut (14 Nov, 15 Nov). Kondisi mikroklimat mendukung penetasan telur dan nimfa wereng."`;
+
+exports[`T1.5: Explainability Engine Tests (TECH_SPEC.md §6.4) > menghasilkan penjelasan status MERAH secara naratif 1`] = `"Suhu rerata 26.8 C dan kelembapan tinggi memenuhi syarat MERAH (BAHAYA) pada 3 hari berturut-turut (14 Nov, 15 Nov, 16 Nov). Potensi ledakan populasi wereng sangat tinggi."`;

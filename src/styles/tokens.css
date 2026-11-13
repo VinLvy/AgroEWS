@@ -1,0 +1,56 @@
+/* tokens.css - AgroEWS Field Design System (FDS) v1.0.0 */
+/* Menggabungkan Design_System_AgroEWS.md Bagian 2 & 3 dengan Koreksi TECH_SPEC.md §12.2 */
+
+:root {
+  /* 2.1 Palet Utama (Brand & Surface) */
+  --agri-primary-900: #064E3B;
+  --agri-primary-700: #047857;
+  --agri-primary-500: #10B981;
+  --agri-primary-50: #ECFDF5;
+
+  --surface-canvas: #F8FAFC;
+  --surface-card: #FFFFFF;
+  --border-subtle: #E2E8F0;
+  
+  /* Koreksi §12.2: Border input form minimal 3:1 WCAG 1.4.11 */
+  --border-strong: #64748B;
+  /* Koreksi §12.2: Border kartu anti-silau */
+  --border-card: #94A3B8;
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+
+  /* 2.2 Token Status Risiko (Agro-Risk Severity Tokens) */
+  /* Status HIJAU - Risiko Rendah */
+  --status-green-bg: #F0FDF4;
+  --status-green-border: #BBF7D0;
+  --status-green-text: #166534;
+  --status-green-accent: #22C55E;
+
+  /* Status KUNING - Risiko Waspada */
+  --status-amber-bg: #FFFBEB;
+  --status-amber-border: #FDE68A;
+  --status-amber-text: #92400E;
+  --status-amber-accent: #F59E0B;
+
+  /* Status MERAH - Risiko Bahaya */
+  --status-red-bg: #FEF2F2;
+  --status-red-border: #FECACA;
+  --status-red-text: #991B1B;
+  --status-red-accent: #EF4444;
+
+  /* Area sentuh interaktif lapangan */
+  --touch-target-min: 48px;
+}
+
+body {
+  background-color: var(--surface-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-jetbrains-mono), "Courier New", monospace;
+}

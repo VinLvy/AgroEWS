@@ -176,6 +176,72 @@ export function RulesClient() {
         </div>
       </div>
 
+      {/* Scientific Calibration Notes Card */}
+      <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card p-5 sm:p-6 shadow-bento space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-agri-50 border border-agri-100 flex items-center justify-center shrink-0 mt-0.5">
+              <StatusIcon name="file-text" className="w-4 h-4 text-agri-700" />
+            </div>
+            <div>
+              <h2 className="text-base sm:text-lg font-extrabold text-content-primary">
+                Catatan Kalibrasi Ilmiah: KTI Tabel 2 vs Operasional v1.0.0 &amp; Temuan Hindcast
+              </h2>
+              <p className="text-xs text-content-muted mt-0.5">
+                Landasan literatur proteksi tanaman dan verifikasi historis ERA5 untuk pengendalian alarm palsu.
+              </p>
+            </div>
+          </div>
+          <span className="px-3 py-1 rounded-full bg-agri-50 border border-status-green-border text-agri-800 text-xs font-bold self-start sm:self-center">
+            Audit Ilmiah &amp; Kalibrasi
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs sm:text-sm leading-relaxed">
+          <div className="p-4 rounded-2xl bg-surface-subtle border border-border-subtle space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="font-extrabold text-content-primary">
+                (a) KTI Tabel 2 (RH &gt; 80%) vs Operasional v1.0.0
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-status-amber-bg border border-status-amber-border text-status-amber-text font-mono text-[11px] font-bold">
+                AMBER &ge; 80% | MERAH &ge; 85%
+              </span>
+            </div>
+            <p className="text-content-secondary">
+              Ambang <span className="font-mono font-bold text-content-primary">RH &gt; 80%</span> pada KTI Tabel 2
+              merepresentasikan onset biologis penetasan telur dan kelangsungan hidup nimfa menurut{" "}
+              <span className="font-semibold text-content-primary">Baehaki (2011)</span> &amp;{" "}
+              <span className="font-semibold text-content-primary">Sofyan et al. (2019)</span>, yang dipetakan ke status{" "}
+              <span className="font-bold text-status-amber-text">AMBER (Waspada &ge; 80%)</span>. Sedangkan aturan
+              operasional <span className="font-mono font-bold text-content-primary">v1.0.0</span> menetapkan{" "}
+              <span className="font-bold text-status-red-text">MERAH &ge; 85%</span> (3 hari berturut-turut) untuk
+              menekan <em>false positives</em> di dataran rendah tropis yang lembap.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-surface-subtle border border-border-subtle space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="font-extrabold text-content-primary">
+                (b) Temuan Hindcast Banyubiru 2013 vs 2023 (ERA5)
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-blue-50 border border-blue-200 text-blue-900 font-mono text-[11px] font-bold">
+                tOptimumMin: 24.0 C (v1.1.0)
+              </span>
+            </div>
+            <p className="text-content-secondary">
+              Uji hindcast ERA5 Kec. Banyubiru (Okt&ndash;Des 2013 vs 2023) menunjukkan suhu rerata Oktober 2013 (
+              <span className="font-mono font-bold text-content-primary">24.74&deg;C</span>) sempat turun tipis di bawah{" "}
+              <span className="font-mono font-bold text-content-primary">25.0&deg;C</span> sebelum ledakan lapangan,
+              sehingga memotivasi penambahan{" "}
+              <span className="font-mono font-bold text-content-primary">tOptimumMin: 24.0&deg;C</span> pada kalibrasi{" "}
+              <span className="font-mono font-bold text-content-primary">v1.1.0</span>. Di sisi lain, supresi{" "}
+              <span className="font-semibold text-content-primary">Layer 4 PPL Fase Bero</span> memblokir alarm palsu
+              akhir musim saat anomali El Nino.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Interactive Simulator Sandbox */}
       <div className="bg-surface-card rounded-3xl border-[1.5px] border-border-card p-5 sm:p-6 shadow-bento space-y-4">
         <div className="border-b border-slate-100 pb-3">
